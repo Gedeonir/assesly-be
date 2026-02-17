@@ -18,7 +18,7 @@ exports.registerUser = async (req, res) => {
     if (!name || !email || !password || !role) {
       return res.status(400).json({ message: "Please fill all fields" });
     }
-    
+
     const userExists = await User.findOne({ email });
 
     if (userExists) {
@@ -55,10 +55,6 @@ exports.loginUser = async (req, res) => {
 
     if (user && (await user.matchPassword(password))) {
       res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
         token: generateToken(user._id),
       });
     } else {
