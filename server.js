@@ -6,7 +6,9 @@ const authRoutes = require("./routes/authRoutes");
 const logger = require("./middlewares/loggerMiddleware");
 const notFound = require("./middlewares/notFoundMiddleware");
 const errorHandler = require("./middlewares/errorHandlingMiddleware");
-
+const studentRoutes = require("./routes/studentRoutes");
+const teacherRoutes = require("./routes/teacherRoutes");
+const assessmentRoutes = require("./routes/assesmentRoutes");
 
 dotenv.config();
 connectDB();
@@ -22,6 +24,9 @@ app.get("/", (req, res) => {
   res.send("API Running...");
 });
 app.use("/api/auth", authRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/teachers", teacherRoutes);
+app.use("/api/assessments", assessmentRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

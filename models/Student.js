@@ -7,7 +7,7 @@ const studentSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    class: {
+    className: {
       type: String,
       required: true,
     },
@@ -17,7 +17,7 @@ const studentSchema = new mongoose.Schema(
     },
     attendancePercentage: {
       type: Number,
-      default: 100,
+      default: 0,
     },
   },
   { timestamps: true }
