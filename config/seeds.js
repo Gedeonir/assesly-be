@@ -1,9 +1,14 @@
 const User= require("../models/User");
 const db=require("./db");
-const dotenv = require("dotenv").config();
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const seedUsers = async () => {
+  await db();
+  console.log("Seeding users...");
   try {
-    await User.deleteMany({email: "admin@example.com"});
+    await User.deleteMany({email: process.env.admin});
     const users = [
       {
         name: "Admin User",
@@ -14,9 +19,11 @@ const seedUsers = async () => {
     ];
     await User.insertMany(users);
     console.log("Users seeded successfully");
+    return process.exit(0);
   } catch (error) {
     console.error("Error seeding users:", error);
+    return process.exit(1);
   }
 };
 
-module.exports = seedUsers;
+seedUsers();
