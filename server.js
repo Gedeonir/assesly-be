@@ -27,6 +27,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/teachers", teacherRoutes);
 app.use("/api/assessments", assessmentRoutes);
+app.use("/api/classes", require("./routes/classRoutes"));
 
 app.use(notFound);
 app.use(errorHandler);
