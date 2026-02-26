@@ -2,6 +2,14 @@ const Assessment = require("../models/Assessment");
 
 // Create a new assessment
 exports.createAssessment = async (req, res) => {
+  if (!req.body.title || !req.body.class || !req.body.totalMarks || !req.body.duration) {
+    return res.status(400).json({ message: "Title, class, total marks, and duration are required" });
+  }
+
+  if(!req.body.questions || req.body.questions.length === 0) {
+    return res.status(400).json({ message: "Assessment must have at least one question" });
+  }
+
   try {
     const assessment = await Assessment.create({
       ...req.body,
@@ -16,7 +24,7 @@ exports.createAssessment = async (req, res) => {
 // Get all assessments (for teacher)
 exports.getAssessments = async (req, res) => {
   try {
-    const assessments = await Assessment.find({ teacher: req.user._id });
+    const assessments = await Assessment.find({ teacher: req.user._id }).populate("class");
     res.json(assessments);
   } catch (error) {
     res.status(500).json({ message: error.message });

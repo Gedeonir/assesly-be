@@ -15,15 +15,17 @@ const questionSchema = new mongoose.Schema({
 const assessmentSchema = new mongoose.Schema(
   {
     title: String,
-    subject: String,
     teacher: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    class: String,
+    class: {type:mongoose.Schema.Types.ObjectId, ref: "Class"},
     totalMarks: Number,
     duration: Number,
+    startDateTime: Date,
+    endDateTime: Date,
     questions: [questionSchema],
+    doneBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );
