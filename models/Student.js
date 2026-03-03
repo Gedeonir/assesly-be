@@ -8,7 +8,8 @@ const studentSchema = new mongoose.Schema(
       required: true,
     },
     className: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"Class",
       required: true,
     },
     enrollmentNumber: {

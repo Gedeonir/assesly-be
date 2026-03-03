@@ -31,10 +31,13 @@ exports.getAssessments = async (req, res) => {
   }
 };
 
+
+
 // Get a single assessment by ID
 exports.getAssessment = async (req, res) => {
   try {
-    const assessment = await Assessment.findById(req.params.id);
+    const assessment = await Assessment.findById(req.params.id)
+    .populate("class");
     if (!assessment) return res.status(404).json({ message: "Assessment not found" });
     res.json(assessment);
   } catch (error) {

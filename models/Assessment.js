@@ -25,7 +25,10 @@ const assessmentSchema = new mongoose.Schema(
     startDateTime: Date,
     endDateTime: Date,
     questions: [questionSchema],
-    doneBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    doneBy: [{ 
+      user:{type: mongoose.Schema.Types.ObjectId, ref: "User"} ,
+      obtained: Number
+    }],
   },
   { timestamps: true }
 );
